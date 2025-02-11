@@ -1,0 +1,65 @@
+{
+    "programacao": [
+      {
+        "id": "cave-generator",
+        "titulo": "Gerador de Cavernas (interativo)",
+        "descricao": "Um gerador procedural de cavernas usando autômatos celulares, clique na imagem para ver as cavernas se formando.",
+        "tipo": "pagina",
+        "url": "projetos/cave generator/index.html",
+        "tecnologias": ["JavaScript", "P5.js"],
+        "tamanho": {
+          "width": 650,
+          "height": 650
+        },
+        "variaveis": [
+          {
+            "nome": "whiteNeighboursCount",
+            "label": "Vizinhos Brancos Necessários",
+            "tipo": "range",
+            "valorInicial": 4,
+            "min": 1,
+            "max": 8,
+            "step": 1
+          },
+          {
+            "nome": "blackNeighboursCount",
+            "label": "Vizinhos Pretos Necessários",
+            "tipo": "range",
+            "valorInicial": 4,
+            "min": 1,
+            "max": 8,
+            "step": 1
+          },
+          {
+            "nome": "chanceWhite",
+            "label": "Chance de Pixel Branco (%)",
+            "tipo": "range",
+            "valorInicial": 50,
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      }
+    ],
+    "modelagem": [
+      {
+        "id": "model1",
+        "titulo": "Drone",
+        "descricao": "Drone modelado e texturizado em Blender",
+        "imagem": "path/to/model1.jpg",
+        "tecnologias": ["Blender", "Photoshop"],
+        "link": "https://www.artstation.com/artwork/5X3Vvg"
+      }
+    ],
+    "mecanico": [
+      {
+        "id": "mec1",
+        "titulo": "Projeto Braço Robótico",
+        "descricao": "Braço robótico projetado em SolidWorks com 6 graus de liberdade",
+        "imagem": "path/to/mec1.jpg",
+        "tecnologias": ["SolidWorks", "Arduino", "Impressão 3D"],
+        "link": "https://link-do-projeto"
+      }
+    ]
+  }

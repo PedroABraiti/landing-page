@@ -1,0 +1,75 @@
+function draw() {
+  background(0);
+
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      noStroke(); //grid não visivel, antes tinha Stroke(255) para representar quadrados com borda branca
+      if (grid[i][j] > 0){
+        fill(grid[i][j], 255, 255);
+      let x = i * w;
+      let y = j * w;
+      square(x, y, w);
+      }
+    }
+  }
+
+  let nextGrid = make2DArray(cols, rows);
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      let state = grid[i][j];
+      let below = grid[i][j + 1]; //checks what is the state of the cell below
+      let moveR, moveL, belowR, belowL;
+      if (i > 0){
+        moveL = grid[i - 1][j];
+        if (j < rows - 1){
+          belowL = grid[i - 1][j + 1];
+        }
+      }
+      if (i < cols - 1){
+        moveR = grid[i + 1][j];
+        if (j < rows - 1){
+          belowR = grid[i + 1][j + 1];
+        }
+      }
+
+      if (state > 0 && state !== 200){ //if there is a cell active (cell > Hue 0)
+        if (notTangible.includes(below) && j < rows - 1) {          //if cell below is not tangible & inside the canva
+          nextGrid[i][j + 1] = grid[i][j];   //the cell below is now a active cell, so the active 'moved'
+        } else if (notTangible.includes(belowR) && notTangible.includes(belowL)){
+          rn = random([-1, 1]);
+          nextGrid[i + rn][j + 1] = grid[i][j];
+        } else if (notTangible.includes(belowR)) {
+          nextGrid[i + 1][j + 1] = grid[i][j];
+        } else if (notTangible.includes(belowL)) {
+          nextGrid[i - 1][j + 1] = grid[i][j];
+        }
+        else {
+          nextGrid[i][j] = grid[i][j];       //if cell bellow is not 0 nor is on grid, the cell stays as 1 'so it does not move'
+        }
+      }
+      else if (isLiquid.includes(state)){
+        if (notTangible.includes(below) && j < rows - 1) {          //if cell below is not tangible & inside the canva
+          nextGrid[i][j + 1] = grid[i][j];   //the cell below is now a active cell, so the active 'moved'
+        } else if (notTangible.includes(belowR) && notTangible.includes(belowL)){
+          rn = random([-1, 1]);
+          nextGrid[i + rn][j + 1] = grid[i][j];
+        } else if (notTangible.includes(belowR)) {
+          nextGrid[i + 1][j + 1] = grid[i][j];
+        } else if (notTangible.includes(belowL)) {
+          nextGrid[i - 1][j + 1] = grid[i][j];
+        } else if (notTangible.includes(moveR) && notTangible.includes(moveL)){
+          rn = random([-1, 1]);
+          nextGrid[i + rn][j] = grid[i][j];
+        } else if (notTangible.includes(moveR)){
+          nextGrid[i + 1][j] = grid[i][j];
+        } else if (notTangible.includes(moveL)){
+          nextGrid[i - 1][j] = grid[i][j];
+        } else{
+          nextGrid[i][j] = grid[i][j];
+        }
+        
+      }
+    }
+  }
+  grid = nextGrid;
+}

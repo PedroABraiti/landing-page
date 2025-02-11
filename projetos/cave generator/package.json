@@ -1,0 +1,16 @@
+{
+    "name": "powdergame",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sketch.js",
+    "type": "module",
+    "scripts": {
+        "start": "node sketch.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "powdergame": "file:"
+    }
+}

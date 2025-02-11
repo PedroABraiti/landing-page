@@ -1,0 +1,147 @@
+function draw() {
+  let currentTime = millis();
+
+  // Se estiver pausado, ainda desenhe o grid
+  background(0);
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      noStroke();
+      if (grid[i][j] > 0) {
+        fill(grid[i][j], 255, 255);
+        let x = i * w;
+        let y = j * w;
+        square(x, y, w);
+      }
+    }
+  }
+
+  if (!isPaused) {
+    // Atualiza a lógica do jogo apenas quando não está pausado
+    if (currentTime - lastFrameTime >= frameTime) {
+      lastFrameTime = currentTime; // Atualiza o tempo do último frame
+
+      let nextGrid = make2DArray(cols, rows);
+      reservedGrid = make2DArray(cols, rows); // Reset reserved grid
+
+      for (let j = rows - 1; j >= 0; j--) { // Percorre de baixo para cima
+        for (let i = 0; i < cols; i++) {
+          let state = grid[i][j];
+          let below = grid[i][j + 1];
+          let moveR, moveL, belowR, belowL, upperR, upperL;
+          if (i > 0) {
+            moveL = grid[i - 1][j];
+            if (j < rows - 1) {
+              belowL = grid[i - 1][j + 1];
+            }
+            if (j > 0) {
+              upperL = grid[i - 1][j - 1];
+            }
+          }
+          if (i < cols - 1) {
+            moveR = grid[i + 1][j];
+            if (j < rows - 1) {
+              belowR = grid[i + 1][j + 1];
+            }
+            if (j > 0) {
+              upperR = grid[i + 1][j - 1];
+            }
+          }
+          //SAND
+          if (state > 0 && state !== 220) { // Movimento de sólidos (areia)
+            if (notTangible.includes(below) && j < rows - 1 && !reservedGrid[i][j + 1]) {
+              nextGrid[i][j + 1] = grid[i][j];
+              reservedGrid[i][j + 1] = true; // Reserva a célula
+              grid[i][j] = 0; // Limpa a célula original imediatamente
+            } else if (!notTangible.includes(moveR) && !notTangible.includes(moveL)) {
+              nextGrid[i][j] = grid[i][j];
+              reservedGrid[i][j] = true;
+            } else if (!notTangible.includes(moveR) && notTangible.includes(belowR) && notTangible.includes(belowL)) {
+              nextGrid[i - 1][j + 1] = grid[i][j];
+              reservedGrid[i - 1][j + 1] = true;
+              grid[i][j] = 0; // Limpa a célula original
+            } else if (!notTangible.includes(moveL) && notTangible.includes(belowL) && notTangible.includes(belowR)) {
+              nextGrid[i + 1][j + 1] = grid[i][j];
+              reservedGrid[i + 1][j + 1] = true;
+              grid[i][j] = 0; // Limpa a célula original
+            } else if (notTangible.includes(belowR) && notTangible.includes(belowL)) {
+              let rn = random([-1, 1]);
+              if (!reservedGrid[i + rn][j + 1]) {
+                nextGrid[i + rn][j + 1] = grid[i][j];
+                reservedGrid[i + rn][j + 1] = true;
+                grid[i][j] = 0; // Limpa a célula original
+              } else if (!reservedGrid[i + (rn * -1)][j + 1]) {
+                nextGrid[i + (rn * -1)][j + 1] = grid[i][j];
+                reservedGrid[i + (rn * -1)][j + 1] = true;
+                grid[i][j] = 0; // Limpa a célula original
+              } else {
+                nextGrid[i][j] = grid[i][j];
+                reservedGrid[i][j] = true;
+              }
+            } else if (notTangible.includes(belowL) && !reservedGrid[i - 1][j + 1]) {
+              nextGrid[i - 1][j + 1] = grid[i][j];
+              reservedGrid[i - 1][j + 1] = true;
+              grid[i][j] = 0; // Limpa a célula original
+            } else if (notTangible.includes(belowR) && !reservedGrid[i + 1][j + 1]) {
+              nextGrid[i + 1][j + 1] = grid[i][j];
+              reservedGrid[i + 1][j + 1] = true;
+              grid[i][j] = 0; // Limpa a célula original
+            } else {
+              nextGrid[i][j] = grid[i][j];
+            }
+          } 
+          //LIQUID
+          else if (isLiquid.includes(state)) { // Movimento de líquidos (água)
+            if (notTangible.includes(below) && j < rows - 1 && !reservedGrid[i][j + 1]) {
+              nextGrid[i][j + 1] = grid[i][j];
+              reservedGrid[i][j + 1] = true;
+            } else if (!notTangible.includes(moveR) && !notTangible.includes(moveL)) {
+              nextGrid[i][j] = grid[i][j];
+            } else if (!notTangible.includes(moveR) && notTangible.includes(belowR) && notTangible.includes(belowL)) {
+              nextGrid[i - 1][j + 1] = grid[i][j];
+              reservedGrid[i - 1][j + 1] = true;
+            } else if (!notTangible.includes(moveL) && notTangible.includes(belowL) && notTangible.includes(belowR)) {
+              nextGrid[i + 1][j + 1] = grid[i][j];
+              reservedGrid[i + 1][j + 1] = true;
+            } else if (notTangible.includes(belowR) && notTangible.includes(belowL)) {
+              let rn = random([-1, 1]);
+              if (!reservedGrid[i + rn][j + 1]) {
+                nextGrid[i + rn][j + 1] = grid[i][j];
+                reservedGrid[i + rn][j + 1] = true;
+              } else if (!reservedGrid[i + (rn * -1)][j + 1]) {
+                nextGrid[i + (rn * -1)][j + 1] = grid[i][j];
+                reservedGrid[i + (rn * -1)][j + 1] = true;
+              } else {
+                nextGrid[i][j] = grid[i][j];
+              }
+            } else if (notTangible.includes(belowR) && !reservedGrid[i + 1][j + 1]) {
+              nextGrid[i + 1][j + 1] = grid[i][j];
+              reservedGrid[i + 1][j + 1] = true;
+            } else if (notTangible.includes(belowL) && !reservedGrid[i - 1][j + 1]) {
+              nextGrid[i - 1][j + 1] = grid[i][j];
+              reservedGrid[i - 1][j + 1] = true;
+            } else if (!notTangible.includes(upperR) && !notTangible.includes(upperL)) {
+              nextGrid[i][j] = grid[i][j];
+            } else if (notTangible.includes(moveR) && notTangible.includes(moveL)) {
+              let rn = random([-1, 1]);
+              if (!reservedGrid[i + rn][j]) {
+                nextGrid[i + rn][j] = grid[i][j];
+                reservedGrid[i + rn][j] = true;
+              } else {
+                nextGrid[i][j] = grid[i][j];
+              }
+            } else if (notTangible.includes(moveR) && !reservedGrid[i + 1][j] && isStatic.includes(upperR)) {
+              nextGrid[i + 1][j] = grid[i][j];
+              reservedGrid[i + 1][j] = true;
+            } else if (notTangible.includes(moveL) && !reservedGrid[i - 1][j] && isStatic.includes(upperL)) {
+              nextGrid[i - 1][j] = grid[i][j];
+              reservedGrid[i - 1][j] = true;
+            } else {
+              nextGrid[i][j] = grid[i][j];
+            }
+          }
+        }
+      }
+      grid = nextGrid; // Atualiza o grid
+    }
+  }
+}
