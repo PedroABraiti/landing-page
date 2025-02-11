@@ -2,8 +2,8 @@
     "programacao": [
       {
         "id": "cave-generator",
-        "titulo": "Gerador de Cavernas (interativo)",
-        "descricao": "Um gerador procedural de cavernas usando autômatos celulares, clique na imagem para ver as cavernas se formando.",
+        "titulo": "Cave Generator (interactive)",
+        "descricao": "A procedural cave generator powered by cellular automata. Click to watch the dynamic cave formation process and explore different generation parameters.",
         "tipo": "pagina",
         "url": "projetos/cave generator/index.html",
         "tecnologias": ["JavaScript", "P5.js"],
