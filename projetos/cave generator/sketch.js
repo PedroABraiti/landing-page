@@ -94,7 +94,6 @@ function mousePressed() {
     }
 }
 
-// Listener para receber atualizações de variáveis
 window.addEventListener('message', function(event) {
     if (event.data.type === 'updateVariable') {
         const value = event.data.value;
@@ -115,6 +114,12 @@ window.addEventListener('message', function(event) {
         }
         
         // Reinicializa e redesenha
+        initializeGrid();
+        draw();
+    }
+    else if (event.data.type === 'restart') {
+        // Apenas reinicializa a grid e redesenha com os valores atuais
+        console.log('Reiniciando com configuração atual:', config);
         initializeGrid();
         draw();
     }

@@ -188,9 +188,34 @@
             letter-spacing: 3px;
         }
 
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
         .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;  /* Força o layout vertical */
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 149, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        /* Remove o grid-template-columns de qualquer lugar que esteja definido */
+        #programacao, #modelagem, #mecanico {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
         }
 

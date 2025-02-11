@@ -47,7 +47,7 @@
         "id": "model1",
         "titulo": "Drone",
         "descricao": "Drone modelado e texturizado em Blender",
-        "imagem": "path/to/model1.jpg",
+        "imagem": "projetos/drone3D/drone3D.jpg",
         "tecnologias": ["Blender", "Photoshop"],
         "link": "https://www.artstation.com/artwork/5X3Vvg"
       }

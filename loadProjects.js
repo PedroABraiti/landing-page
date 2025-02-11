@@ -26,46 +26,58 @@ function createProjectCard(project) {
         const controls = project.variaveis ? createVariableControls(project) : '';
         
         projectContent = `
-            <div class="project-frame" style="display: none;">
-                <iframe
-                    id="frame-${project.id}"
-                    src="${project.url}"
-                    width="${project.tamanho?.width || 800}"
-                    height="${project.tamanho?.height || 600}"
-                    style="border: 1px solid var(--matrix-color); border-radius: 8px;"
-                ></iframe>
-                
-                ${controls ? `
-                <div class="variable-controls" style="margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 8px;">
-                    <h4 style="color: var(--matrix-color); margin-bottom: 1rem;">Controles</h4>
-                    ${controls}
+            <div class="project-content">
+                <h3>${project.titulo}</h3>
+                <p>${project.descricao}</p>
+                <div class="tech-stack">
+                    ${project.tecnologias.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                 </div>
-                ` : ''}
-            </div>
-            <div class="project-controls">
-                <button class="btn toggle-project" onclick="toggleProject('${project.id}')">
-                    <i class="fas fa-play"></i> Mostrar Projeto
-                </button>
-                <button class="btn restart-project" onclick="restartProject('${project.id}')" style="display: none;">
-                    <i class="fas fa-redo"></i> Reiniciar
-                </button>
+                <div class="project-frame" style="display: none;">
+                    <iframe
+                        id="frame-${project.id}"
+                        src="${project.url}"
+                        width="${project.tamanho?.width || 800}"
+                        height="${project.tamanho?.height || 600}"
+                        style="border: 1px solid var(--matrix-color); border-radius: 8px;"
+                    ></iframe>
+                    
+                    ${controls ? `
+                    <div class="variable-controls" style="margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                        <h4 style="color: var(--matrix-color); margin-bottom: 1rem;">Controles</h4>
+                        ${controls}
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="project-controls">
+                    <button class="btn toggle-project" onclick="toggleProject('${project.id}')">
+                        <i class="fas fa-play"></i> Mostrar Projeto
+                    </button>
+                    <button class="btn restart-project" onclick="restartProject('${project.id}')" style="display: none;">
+                        <i class="fas fa-redo"></i> Reiniciar
+                    </button>
+                </div>
             </div>
         `;
-    } else if (project.tipo === 'link') {
-        projectContent = `<a href="${project.link}" class="btn" target="_blank">Ver Projeto</a>`;
+    } else {
+        projectContent = `
+            ${project.imagem ? `
+                <div class="project-image">
+                    <img src="${project.imagem}" alt="${project.titulo}" 
+                        style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px 8px 0 0;">
+                </div>
+            ` : ''}
+            <div class="project-content" style="padding: 1.5rem;">
+                <h3>${project.titulo}</h3>
+                <p>${project.descricao}</p>
+                <div class="tech-stack">
+                    ${project.tecnologias.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+                <a href="${project.link}" class="btn" target="_blank">Ver Projeto</a>
+            </div>
+        `;
     }
     
-    card.innerHTML = `
-        <div class="project-content">
-            <h3>${project.titulo}</h3>
-            <p>${project.descricao}</p>
-            <div class="tech-stack">
-                ${project.tecnologias.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            </div>
-            ${projectContent}
-        </div>
-    `;
-    
+    card.innerHTML = projectContent;
     return card;
 }
 
@@ -139,7 +151,12 @@ window.toggleProject = function(projectId) {
 
 window.restartProject = function(projectId) {
     const frame = document.querySelector(`#frame-${projectId}`);
-    frame.src = frame.src;
+    if (frame) {
+        // Em vez de recarregar o iframe, enviamos uma mensagem para reiniciar
+        frame.contentWindow.postMessage({
+            type: 'restart'
+        }, '*');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadProjects);
