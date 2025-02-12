@@ -6,7 +6,7 @@
         "descricao": "A procedural cave generator powered by cellular automata. Click to watch the dynamic cave formation process and explore different generation parameters.",
         "tipo": "pagina",
         "url": "projetos/cave generator/index.html",
-        "tecnologias": ["JavaScript", "P5.js"],
+        "tecnologias": ["HTML", "JavaScript", "P5.js"],
         "tamanho": {
           "width": 650,
           "height": 650
