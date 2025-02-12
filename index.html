@@ -1,925 +1,925 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio - Engenharia de Computação</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-    <style>
-        :root {
-            --matrix-color: #00ff95;
-            --bg-color: #0a0a0a;
-            --text-color: #e0e0e0;
-            --accent-color: #00ff95;
-            --overlay-color: rgba(0, 0, 0, 0.7);
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meu Portfólio - Engenharia de Computação</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+        <style>
+            :root {
+                --matrix-color: #00ff95;
+                --bg-color: #0a0a0a;
+                --text-color: #e0e0e0;
+                --accent-color: #00ff95;
+                --overlay-color: rgba(0, 0, 0, 0.7);
+            }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        body {
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            overflow-x: hidden;
-        }
+            body {
+                font-family: 'Courier New', monospace;
+                line-height: 1.6;
+                color: var(--text-color);
+                background-color: var(--bg-color);
+                overflow-x: hidden;
+            }
 
-        #matrix-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+            #matrix-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                position: relative;
+                z-index: 2;
+            }
 
-        header {
-            background-color: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(5px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 149, 0.2);
-        }
+            header {
+                background-color: rgba(10, 10, 10, 0.9);
+                backdrop-filter: blur(5px);
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                border-bottom: 1px solid rgba(0, 255, 149, 0.2);
+            }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+            }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s, text-shadow 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-        }
-
-        nav a:hover {
-            color: var(--matrix-color);
-            text-shadow: 0 0 10px var(--matrix-color);
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 4rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            background: var(--overlay-color);
-            padding: 3rem;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 149, 0.2);
-            backdrop-filter: blur(5px);
-            width: 90%;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 10px;
-            border: 2px solid rgba(0, 255, 149, 0.3);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-text {
-            text-align: left;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                padding: 2rem;
+            nav ul {
+                display: flex;
+                list-style: none;
                 gap: 2rem;
             }
 
+            nav a {
+                text-decoration: none;
+                color: var(--text-color);
+                font-weight: 500;
+                transition: color 0.3s, text-shadow 0.3s;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-size: 0.9rem;
+            }
+
+            nav a:hover {
+                color: var(--matrix-color);
+                text-shadow: 0 0 10px var(--matrix-color);
+            }
+
+            .hero {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                padding-top: 4rem;
+                position: relative;
+            }
+
+            .hero-content {
+                max-width: 1000px;
+                background: var(--overlay-color);
+                padding: 3rem;
+                border-radius: 10px;
+                border: 1px solid rgba(0, 255, 149, 0.2);
+                backdrop-filter: blur(5px);
+                width: 90%;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 3rem;
+                align-items: center;
+            }
+
             .profile-image {
-                margin: 0 auto;
+                width: 200px;
+                height: 200px;
+                border-radius: 10px;
+                border: 2px solid rgba(0, 255, 149, 0.3);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .profile-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
 
             .hero-text {
-                text-align: center;
+                text-align: left;
             }
-        }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--matrix-color);
-            text-shadow: 0 0 10px rgba(0, 255, 149, 0.5);
-            font-weight: 700;
-        }
+            @media (max-width: 768px) {
+                .hero-content {
+                    grid-template-columns: 1fr;
+                    padding: 2rem;
+                    gap: 2rem;
+                }
 
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+                .profile-image {
+                    margin: 0 auto;
+                }
 
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: transparent;
-            color: var(--matrix-color);
-            text-decoration: none;
-            border: 1px solid var(--matrix-color);
-            border-radius: 5px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            background-color: var(--matrix-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(0, 255, 149, 0.5);
-        }
-
-        .projects {
-            padding: 4rem 0;
-            background: rgba(10, 10, 10, 0.95);
-        }
-
-        .projects h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--matrix-color);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .category-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        
-        .project-grid {
-            display: flex;
-            flex-direction: column;  /* Força o layout vertical */
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .project-card {
-            width: 100%;
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 149, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        /* Remove o grid-template-columns de qualquer lugar que esteja definido */
-        #programacao, #modelagem, #mecanico {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 149, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 255, 149, 0.2);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            color: var(--matrix-color);
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
+                .hero-text {
+                    text-align: center;
+                }
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                color: var(--matrix-color);
+                text-shadow: 0 0 10px rgba(0, 255, 149, 0.5);
+                font-weight: 700;
             }
-        }
 
-        .tech-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(0, 255, 149, 0.1);
-            color: var(--matrix-color);
-            border-radius: 15px;
-            margin: 0.25rem;
-            font-size: 0.8rem;
-            border: 1px solid rgba(0, 255, 149, 0.3);
-        }
-        .dropdown-section {
-            position: fixed;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            z-index: 999;
-            transition: top 0.5s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-            backdrop-filter: blur(5px);
-        }
-        
-        .dropdown-section.active {
-            top: 70px; /* Ajuste conforme a altura do seu header */
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: 1px solid var(--matrix-color);
-            color: var(--matrix-color);
-            padding: 5px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-        
-        .close-btn:hover {
-            background: var(--matrix-color);
-            color: var(--bg-color);
-        }
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                opacity: 0.9;
+            }
 
-        .about-content, .contact-content {
-            position: relative;
-            padding-top: 3rem !important;
-        }
+            .btn {
+                display: inline-block;
+                padding: 0.75rem 1.5rem;
+                background-color: transparent;
+                color: var(--matrix-color);
+                text-decoration: none;
+                border: 1px solid var(--matrix-color);
+                border-radius: 5px;
+                transition: all 0.3s;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                position: relative;
+                overflow: hidden;
+            }
 
-        .project-frame {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .project-controls {
-            margin: 1rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .toggle-project {
-            min-width: 150px;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="matrix-background"></canvas>
+            .btn:hover {
+                background-color: var(--matrix-color);
+                color: var(--bg-color);
+                box-shadow: 0 0 20px rgba(0, 255, 149, 0.5);
+            }
 
-    <header>
-        <nav class="container">
-            <h1 style="color: var(--matrix-color);">Pedro Alessandrini Braiti</h1>
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#sobre">Sobre <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
-                <li><a href="#contato">Contato <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
-            </ul>
-        </nav>
-    </header>
+            .projects {
+                padding: 4rem 0;
+                background: rgba(10, 10, 10, 0.95);
+            }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                // Criar um wrapper com dimensões fixas baseadas no heroContent original
-                const wrapper = document.createElement('div');
-                wrapper.className = 'tilt-wrapper';
-                
-                // Obter dimensões originais
-                const originalRect = heroContent.getBoundingClientRect();
-                
-                // Criar a área de detecção com dimensões exatas
-                const hitArea = document.createElement('div');
-                hitArea.className = 'tilt-hit-area';
-                
-                // Estruturar os elementos
-                heroContent.parentNode.insertBefore(wrapper, heroContent);
-                wrapper.appendChild(heroContent);
-                wrapper.appendChild(hitArea);
-                
-                // Adicionar estilos necessários
-                const style = document.createElement('style');
-                style.textContent = `
-                    .tilt-wrapper {
-                        position: relative;
-                        width: ${originalRect.width}px;
-                        height: ${originalRect.height}px;
-                        margin: 0 auto;
-                    }
-                    .tilt-hit-area {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        z-index: 4;
-                        pointer-events: none;
-                    }
-                    .hero-content {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        z-index: 1;
-                        pointer-events: auto;
-                    }
-                    .hero-content > * {
-                        position: relative;
-                        z-index: 5;
-                        pointer-events: auto;
-                    }
-                `;
-                document.head.appendChild(style);
-        
-                // Configurar estilos iniciais
-                Object.assign(heroContent.style, {
-                    transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', // Adicione esta linha
-                    transition: 'all 0.2s linear',
-                    transformStyle: 'preserve-3d',
-                    background: 'var(--overlay-color)'
-                });
-        
-                let isCalculating = false;
-        
-                function handleMouseMove(event) {
-                    if (isCalculating) return;
-                    isCalculating = true;
-        
-                    const rect = hitArea.getBoundingClientRect();
-                    const mouseX = event.clientX - rect.left;
-                    const mouseY = event.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((mouseY - centerY) / centerY) * -15;
-                    const rotateY = ((mouseX - centerX) / centerX) * 15;
-        
-                    const gradientX = (mouseX / rect.width) * 100;
-                    const gradientY = (mouseY / rect.height) * 100;
-                    
-                    heroContent.style.transition = 'all 0.2s linear';
-                    
-                    heroContent.style.transform = `
-                    perspective(1000px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    scale3d(1.02, 1.02, 1.02)
-                    `;
-        
-                    // Mantendo o mesmo efeito de luz que estava funcionando bem
-                    heroContent.style.background = `
-                        linear-gradient(
-                            ${gradientY}deg,
-                            rgba(0, 255, 149, 0.15) 0%,
-                            rgba(10, 10, 10, 0.95) ${gradientX}%
-                        )
-                    `;
-                    
-                    const profileImage = heroContent.querySelector('.profile-image');
-                    const heroText = heroContent.querySelector('.hero-text');
-                    
-                    if (profileImage) {
-                        profileImage.style.transition = 'transform 0.2s linear';
-                        profileImage.style.transform = `translateZ(50px) rotateX(${rotateX * 0.5}deg) rotateY(${rotateY * 0.5}deg)`;
-                    }
-                    
-                    if (heroText) {
-                        heroText.style.transition = 'transform 0.2s linear';
-                        heroText.style.transform = `translateZ(30px) rotateX(${rotateX * 0.3}deg) rotateY(${rotateY * 0.3}deg)`;
-                    }
-        
-                    requestAnimationFrame(() => {
-                        isCalculating = false;
-                    });
+            .projects h2 {
+                text-align: center;
+                margin-bottom: 2rem;
+                color: var(--matrix-color);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+            .category-buttons {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+                gap: 10px;
+            }
+            
+            .project-grid {
+                display: flex;
+                flex-direction: column;  /* Força o layout vertical */
+                gap: 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .project-card {
+                width: 100%;
+                background: rgba(20, 20, 20, 0.95);
+                border-radius: 10px;
+                overflow: hidden;
+                border: 1px solid rgba(0, 255, 149, 0.2);
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+            
+            /* Remove o grid-template-columns de qualquer lugar que esteja definido */
+            #programacao, #modelagem, #mecanico {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .project-card {
+                background: rgba(20, 20, 20, 0.95);
+                border-radius: 10px;
+                overflow: hidden;
+                border: 1px solid rgba(0, 255, 149, 0.2);
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+
+            .project-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 20px rgba(0, 255, 149, 0.2);
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-content h3 {
+                color: var(--matrix-color);
+                margin-bottom: 0.5rem;
+            }
+
+            @media (max-width: 768px) {
+                nav ul {
+                    display: none;
                 }
-        
-                function handleMouseLeave() {
-                    heroContent.style.transition = 'all 0.2s linear';
-                    heroContent.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-                    heroContent.style.background = 'var(--overlay-color)';
-                    
-                    const profileImage = heroContent.querySelector('.profile-image');
-                    const heroText = heroContent.querySelector('.hero-text');
-                    
-                    if (profileImage) {
-                        profileImage.style.transition = 'transform 0.2s linear';
-                        profileImage.style.transform = 'translateZ(50px)';
-                    }
-                    
-                    if (heroText) {
-                        heroText.style.transition = 'transform 0.2s linear';
-                        heroText.style.transform = 'translateZ(30px)';
-                    }
-                }
-        
-                // Configurar elementos internos
-                const profileImage = heroContent.querySelector('.profile-image');
-                const heroText = heroContent.querySelector('.hero-text');
-        
-                if (profileImage) {
-                    Object.assign(profileImage.style, {
-                        transform: 'translateZ(50px)',
-                        transition: 'transform 0.2s linear'
-                    });
-                }
-        
-                if (heroText) {
-                    Object.assign(heroText.style, {
-                        transform: 'translateZ(30px)',
-                        transition: 'transform 0.2s linear'
-                    });
-                }
-        
-                const detectArea = document.createElement('div');
-                detectArea.style.position = 'fixed';
-                detectArea.style.pointerEvents = 'none';
 
-                let isInside = false;
-                let areaRect = null;
-                let lastRotateX = 0;
-                let lastRotateY = 0;
-                
-                function updateDetectArea() {
-                    const heroRect = heroContent.getBoundingClientRect();
-                    areaRect = {
-                        left: heroRect.left,
-                        top: heroRect.top,
-                        right: heroRect.left + heroRect.width,
-                        bottom: heroRect.top + heroRect.height
-                    };
+                .hero h1 {
+                    font-size: 2rem;
                 }
-                
-                document.addEventListener('mousemove', (event) => {
-                    if (!areaRect) updateDetectArea();
+            }
+
+            .tech-tag {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                background: rgba(0, 255, 149, 0.1);
+                color: var(--matrix-color);
+                border-radius: 15px;
+                margin: 0.25rem;
+                font-size: 0.8rem;
+                border: 1px solid rgba(0, 255, 149, 0.3);
+            }
+            .dropdown-section {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                z-index: 999;
+                transition: top 0.5s ease;
+                max-height: 80vh;
+                overflow-y: auto;
+                backdrop-filter: blur(5px);
+            }
+            
+            .dropdown-section.active {
+                top: 70px; /* Ajuste conforme a altura do seu header */
+            }
+            
+            .close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: transparent;
+                border: 1px solid var(--matrix-color);
+                color: var(--matrix-color);
+                padding: 5px 15px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: all 0.3s;
+                z-index: 1000;
+            }
+            
+            .close-btn:hover {
+                background: var(--matrix-color);
+                color: var(--bg-color);
+            }
+
+            .about-content, .contact-content {
+                position: relative;
+                padding-top: 3rem !important;
+            }
+
+            .project-frame {
+                margin: 1rem 0;
+                padding: 1rem;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            .project-controls {
+                margin: 1rem 0;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .toggle-project {
+                min-width: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="matrix-background"></canvas>
+
+        <header>
+            <nav class="container">
+                <h1 style="color: var(--matrix-color);">Pedro Alessandrini Braiti</h1>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#sobre">Sobre <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
+                    <li><a href="#contato">Contato <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    // Criar um wrapper com dimensões fixas baseadas no heroContent original
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'tilt-wrapper';
                     
-                    const mouseX = event.clientX;
-                    const mouseY = event.clientY;
+                    // Obter dimensões originais
+                    const originalRect = heroContent.getBoundingClientRect();
                     
-                    const isMouseInside = 
-                        mouseX >= areaRect.left &&
-                        mouseX <= areaRect.right &&
-                        mouseY >= areaRect.top &&
-                        mouseY <= areaRect.bottom;
+                    // Criar a área de detecção com dimensões exatas
+                    const hitArea = document.createElement('div');
+                    hitArea.className = 'tilt-hit-area';
                     
-                    if (isMouseInside) {
-                        if (!isInside) {
-                            isInside = true;
-                            // Começar da posição plana
-                            heroContent.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                            // Forçar um reflow
-                            heroContent.offsetHeight;
+                    // Estruturar os elementos
+                    heroContent.parentNode.insertBefore(wrapper, heroContent);
+                    wrapper.appendChild(heroContent);
+                    wrapper.appendChild(hitArea);
+                    
+                    // Adicionar estilos necessários
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .tilt-wrapper {
+                            position: relative;
+                            width: ${originalRect.width}px;
+                            height: ${originalRect.height}px;
+                            margin: 0 auto;
                         }
-                        handleMouseMove(event);
-                    } else if (isInside) {
-                        isInside = false;
-                        handleMouseLeave();
+                        .tilt-hit-area {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 4;
+                            pointer-events: none;
+                        }
+                        .hero-content {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 1;
+                            pointer-events: auto;
+                        }
+                        .hero-content > * {
+                            position: relative;
+                            z-index: 5;
+                            pointer-events: auto;
+                        }
+                    `;
+                    document.head.appendChild(style);
+            
+                    // Configurar estilos iniciais
+                    Object.assign(heroContent.style, {
+                        transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', // Adicione esta linha
+                        transition: 'all 0.2s linear',
+                        transformStyle: 'preserve-3d',
+                        background: 'var(--overlay-color)'
+                    });
+            
+                    let isCalculating = false;
+            
+                    function handleMouseMove(event) {
+                        if (isCalculating) return;
+                        isCalculating = true;
+            
+                        const rect = hitArea.getBoundingClientRect();
+                        const mouseX = event.clientX - rect.left;
+                        const mouseY = event.clientY - rect.top;
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const rotateX = ((mouseY - centerY) / centerY) * -15;
+                        const rotateY = ((mouseX - centerX) / centerX) * 15;
+            
+                        const gradientX = (mouseX / rect.width) * 100;
+                        const gradientY = (mouseY / rect.height) * 100;
+                        
+                        heroContent.style.transition = 'all 0.2s linear';
+                        
+                        heroContent.style.transform = `
+                        perspective(1000px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        scale3d(1.02, 1.02, 1.02)
+                        `;
+            
+                        // Mantendo o mesmo efeito de luz que estava funcionando bem
+                        heroContent.style.background = `
+                            linear-gradient(
+                                ${gradientY}deg,
+                                rgba(0, 255, 149, 0.20) 0%,
+                                rgba(10, 10, 10, 0.95) ${gradientX}%
+                            )
+                        `;
+                        
+                        const profileImage = heroContent.querySelector('.profile-image');
+                        const heroText = heroContent.querySelector('.hero-text');
+                        
+                        if (profileImage) {
+                            profileImage.style.transition = 'transform 0.2s linear';
+                            profileImage.style.transform = `translateZ(50px) rotateX(${rotateX * 0.5}deg) rotateY(${rotateY * 0.5}deg)`;
+                        }
+                        
+                        if (heroText) {
+                            heroText.style.transition = 'transform 0.2s linear';
+                            heroText.style.transform = `translateZ(30px) rotateX(${rotateX * 0.3}deg) rotateY(${rotateY * 0.3}deg)`;
+                        }
+            
+                        requestAnimationFrame(() => {
+                            isCalculating = false;
+                        });
                     }
-                });
+            
+                    function handleMouseLeave() {
+                        heroContent.style.transition = 'all 0.2s linear';
+                        heroContent.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                        heroContent.style.background = 'var(--overlay-color)';
+                        
+                        const profileImage = heroContent.querySelector('.profile-image');
+                        const heroText = heroContent.querySelector('.hero-text');
+                        
+                        if (profileImage) {
+                            profileImage.style.transition = 'transform 0.2s linear';
+                            profileImage.style.transform = 'translateZ(50px)';
+                        }
+                        
+                        if (heroText) {
+                            heroText.style.transition = 'transform 0.2s linear';
+                            heroText.style.transform = 'translateZ(30px)';
+                        }
+                    }
+            
+                    // Configurar elementos internos
+                    const profileImage = heroContent.querySelector('.profile-image');
+                    const heroText = heroContent.querySelector('.hero-text');
+            
+                    if (profileImage) {
+                        Object.assign(profileImage.style, {
+                            transform: 'translateZ(50px)',
+                            transition: 'transform 0.2s linear'
+                        });
+                    }
+            
+                    if (heroText) {
+                        Object.assign(heroText.style, {
+                            transform: 'translateZ(30px)',
+                            transition: 'transform 0.2s linear'
+                        });
+                    }
+            
+                    const detectArea = document.createElement('div');
+                    detectArea.style.position = 'fixed';
+                    detectArea.style.pointerEvents = 'none';
 
-                window.addEventListener('scroll', updateDetectArea);
-                window.addEventListener('resize', updateDetectArea);
-            }
-        });
-    </script>
+                    let isInside = false;
+                    let areaRect = null;
+                    let lastRotateX = 0;
+                    let lastRotateY = 0;
+                    
+                    function updateDetectArea() {
+                        const heroRect = heroContent.getBoundingClientRect();
+                        areaRect = {
+                            left: heroRect.left,
+                            top: heroRect.top,
+                            right: heroRect.left + heroRect.width,
+                            bottom: heroRect.top + heroRect.height
+                        };
+                    }
+                    
+                    document.addEventListener('mousemove', (event) => {
+                        if (!areaRect) updateDetectArea();
+                        
+                        const mouseX = event.clientX;
+                        const mouseY = event.clientY;
+                        
+                        const isMouseInside = 
+                            mouseX >= areaRect.left &&
+                            mouseX <= areaRect.right &&
+                            mouseY >= areaRect.top &&
+                            mouseY <= areaRect.bottom;
+                        
+                        if (isMouseInside) {
+                            if (!isInside) {
+                                isInside = true;
+                                // Começar da posição plana
+                                heroContent.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                                // Forçar um reflow
+                                heroContent.offsetHeight;
+                            }
+                            handleMouseMove(event);
+                        } else if (isInside) {
+                            isInside = false;
+                            handleMouseLeave();
+                        }
+                    });
 
-    <section id="inicio" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="profile-image">
-                    <img src="/api/placeholder/200/200" alt="foto" />
-                </div>
-                <div class="hero-text">
-                    <h1>Engenheiro de Computação</h1>
-                    <p>Desenvolvedor apaixonado por tecnologia e inovação. 
-                       Transformando problemas complexos em soluções elegantes através de código.</p>
-                    <a href="#projetos" class="btn">Ver Projetos</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projetos" class="projects">
-        <div class="container">
-            <h2>Meus Projetos</h2>
-    
-            <div class="category-buttons">
-                <button class="category-btn active" data-category="programacao">Programação</button>
-                <button class="category-btn" data-category="modelagem">Modelagem 3D</button>
-                <button class="category-btn" data-category="mecanico">Projetos Mecânicos</button>
-            </div>
-    
-            <div class="project-grid" id="programacao">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Projeto 1 - Programação</h3>
-                        <p>Descrição do projeto.</p>
-                        <a href="#" class="btn">Ver Projeto</a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="project-grid" id="modelagem" style="display: none;">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Projeto 1 - Modelagem 3D</h3>
-                        <p>Descrição do projeto.</p>
-                        <a href="#" class="btn">Ver Projeto</a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="project-grid" id="mecanico" style="display: none;">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Projeto 1 - Mecânico</h3>
-                        <p>Descrição do projeto.</p>
-                        <a href="#" class="btn">Ver Projeto</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <script>
-        document.querySelectorAll('.category-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove a classe 'active' de todos os botões
-                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-    
-                // Adiciona a classe 'active' ao botão clicado
-                button.classList.add('active');
-    
-                // Oculta todos os projetos
-                document.querySelectorAll('.project-grid').forEach(grid => {
-                    grid.style.display = 'none';
-                });
-    
-                // Exibe os projetos da categoria selecionada
-                document.getElementById(button.dataset.category).style.display = 'grid';
+                    window.addEventListener('scroll', updateDetectArea);
+                    window.addEventListener('resize', updateDetectArea);
+                }
             });
-        });
-    </script>
-    
-    <style>
-        .category-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .category-btn {
-            padding: 10px 20px;
-            border: 1px solid var(--matrix-color);
-            background: transparent;
-            color: var(--matrix-color);
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s;
-        }
-        .category-btn:hover {
-            background: var(--matrix-color);
-            color: var(--bg-color);
-        }
-        /* Botão ativo (verde) */
-        .category-btn.active {
-            background: #00ff94;
-            color: #000;
-            border-color: #00ff94;
-        }
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-    </style>
-    
-    <script>
-        // Efeito de Letras Flutuantes
-        const canvas = document.getElementById('matrix-background');
-        const ctx = canvas.getContext('2d');
+        </script>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-image">
+                        <img src="/api/placeholder/200/200" alt="foto" />
+                    </div>
+                    <div class="hero-text">
+                        <h1>Engenheiro de Computação</h1>
+                        <p>Desenvolvedor apaixonado por tecnologia e inovação. 
+                        Transformando problemas complexos em soluções elegantes através de código.</p>
+                        <a href="#projetos" class="btn">Ver Projetos</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        class Letter {
-            constructor(x, y, char) {
-                this.x = x;
-                this.y = y;
-                this.char = char;
-                this.fontSize = 20;
-                this.originalY = y;
-                this.isFalling = false;
-                this.rotation = 0;
-                this.opacity = 0;
-                this.fallSpeed = 0;
-                this.rotationSpeed = 0;
-            }
-
-            startFall() {
-                if (!this.isFalling) {
-                    this.isFalling = true;
-                    this.fallSpeed = Math.random() * 5 + 3;
-                    this.rotationSpeed = (Math.random() - 0.5) * 0.2;
-                    this.rotation = (Math.random() - 0.5) * 40; // Rotação inicial aleatória entre -20 e +20
-                }
-            }
-
-            update() {
-                if (!this.isFalling) {
-                    if (this.opacity < 1) {
-                        this.opacity += 0.02;
-                    }
-                } else {
-                    this.y += this.fallSpeed;
-                    this.fallSpeed += 0.2;
-                    this.fontSize += 0.5;
-                    this.rotation += this.rotationSpeed;
-                    this.opacity -= 0.02;
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation * Math.PI / 180);
-                ctx.font = `${this.fontSize}px monospace`;
-                ctx.fillStyle = `rgba(0, 255, 149, ${this.opacity})`;
-                ctx.fillText(this.char, 0, 0);
-                ctx.restore();
-            }
-
-            checkMouse(mouseX, mouseY) {
-                const distance = Math.sqrt(
-                    Math.pow(this.x - mouseX, 2) + 
-                    Math.pow(this.y - mouseY, 2)
-                );
-                if (distance < 50 && !this.isFalling) {
-                    this.startFall();
-                }
-            }
-        }
-
-        const chars = "abcdefghijklmnopqrstuvwxyz0123456789&?!<>+%";
-        const letters = [];
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseX = e.clientX - rect.left;
-            mouseY = e.clientY - rect.top;
-        });
+        <section id="projetos" class="projects">
+            <div class="container">
+                <h2>Meus Projetos</h2>
         
-
-        // Adicionar novas letras periodicamente
-        function addLetter() {
-            if (letters.length < 300) { // Limite máximo de letras
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const char = chars[Math.floor(Math.random() * chars.length)];
-                letters.push(new Letter(x, y, char));
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="programacao">Programação</button>
+                    <button class="category-btn" data-category="modelagem">Modelagem 3D</button>
+                    <button class="category-btn" data-category="mecanico">Projetos Mecânicos</button>
+                </div>
+        
+                <div class="project-grid" id="programacao">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Projeto 1 - Programação</h3>
+                            <p>Descrição do projeto.</p>
+                            <a href="#" class="btn">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="project-grid" id="modelagem" style="display: none;">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Projeto 1 - Modelagem 3D</h3>
+                            <p>Descrição do projeto.</p>
+                            <a href="#" class="btn">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="project-grid" id="mecanico" style="display: none;">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Projeto 1 - Mecânico</h3>
+                            <p>Descrição do projeto.</p>
+                            <a href="#" class="btn">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove a classe 'active' de todos os botões
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+        
+                    // Adiciona a classe 'active' ao botão clicado
+                    button.classList.add('active');
+        
+                    // Oculta todos os projetos
+                    document.querySelectorAll('.project-grid').forEach(grid => {
+                        grid.style.display = 'none';
+                    });
+        
+                    // Exibe os projetos da categoria selecionada
+                    document.getElementById(button.dataset.category).style.display = 'grid';
+                });
+            });
+        </script>
+        
+        <style>
+            .category-buttons {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+                gap: 10px;
             }
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Atualizar e desenhar letras
-            for (let i = letters.length - 1; i >= 0; i--) {
-                const letter = letters[i];
-                letter.checkMouse(mouseX, mouseY);
-                letter.update();
-                letter.draw();
-
-                // Remover letras que saíram da tela ou ficaram transparentes
-                if (letter.y > canvas.height + 100 || letter.opacity <= 0) {
-                    letters.splice(i, 1);
-                }
+            .category-btn {
+                padding: 10px 20px;
+                border: 1px solid var(--matrix-color);
+                background: transparent;
+                color: var(--matrix-color);
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background 0.3s, color 0.3s;
             }
+            .category-btn:hover {
+                background: var(--matrix-color);
+                color: var(--bg-color);
+            }
+            /* Botão ativo (verde) */
+            .category-btn.active {
+                background: #00ff94;
+                color: #000;
+                border-color: #00ff94;
+            }
+            .project-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        </style>
+        
+        <script>
+            // Efeito de Letras Flutuantes
+            const canvas = document.getElementById('matrix-background');
+            const ctx = canvas.getContext('2d');
 
-            requestAnimationFrame(animate);
-        }
-
-        // Iniciar animação
-        animate();
-
-        // Adicionar novas letras a cada 75ms
-        setInterval(addLetter, 75);
-
-        // Resize handling
-        window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const columns = canvas.width / fontSize;
-            drops.length = 0;
-            for (let i = 0; i < columns; i++) {
-                drops[i] = 1;
-            }
-        });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+            class Letter {
+                constructor(x, y, char) {
+                    this.x = x;
+                    this.y = y;
+                    this.char = char;
+                    this.fontSize = 20;
+                    this.originalY = y;
+                    this.isFalling = false;
+                    this.rotation = 0;
+                    this.opacity = 0;
+                    this.fallSpeed = 0;
+                    this.rotationSpeed = 0;
+                }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('nav a');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    
-                    // Se for sobre ou contato, trata como dropdown
-                    if(targetId === 'sobre' || targetId === 'contato') {
-                        const targetSection = document.getElementById(targetId);
-                        const isActive = targetSection.classList.contains('active');
-                        
-                        // Fecha todas as seções dropdown primeiro
-                        document.querySelectorAll('.dropdown-section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-                        
-                        // Se a seção clicada não estava ativa, abre ela
-                        if (!isActive) {
-                            targetSection.classList.add('active');
+                startFall() {
+                    if (!this.isFalling) {
+                        this.isFalling = true;
+                        this.fallSpeed = Math.random() * 5 + 3;
+                        this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                        this.rotation = (Math.random() - 0.5) * 40; // Rotação inicial aleatória entre -20 e +20
+                    }
+                }
+
+                update() {
+                    if (!this.isFalling) {
+                        if (this.opacity < 1) {
+                            this.opacity += 0.02;
                         }
                     } else {
-                        // Para outros links, mantém o comportamento original
-                        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                        this.y += this.fallSpeed;
+                        this.fallSpeed += 0.2;
+                        this.fontSize += 0.5;
+                        this.rotation += this.rotationSpeed;
+                        this.opacity -= 0.02;
                     }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation * Math.PI / 180);
+                    ctx.font = `${this.fontSize}px monospace`;
+                    ctx.fillStyle = `rgba(0, 255, 149, ${this.opacity})`;
+                    ctx.fillText(this.char, 0, 0);
+                    ctx.restore();
+                }
+
+                checkMouse(mouseX, mouseY) {
+                    const distance = Math.sqrt(
+                        Math.pow(this.x - mouseX, 2) + 
+                        Math.pow(this.y - mouseY, 2)
+                    );
+                    if (distance < 50 && !this.isFalling) {
+                        this.startFall();
+                    }
+                }
+            }
+
+            const chars = "abcdefghijklmnopqrstuvwxyz0123456789&?!<>+%";
+            const letters = [];
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
+            
+
+            // Adicionar novas letras periodicamente
+            function addLetter() {
+                if (letters.length < 300) { // Limite máximo de letras
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const char = chars[Math.floor(Math.random() * chars.length)];
+                    letters.push(new Letter(x, y, char));
+                }
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Atualizar e desenhar letras
+                for (let i = letters.length - 1; i >= 0; i--) {
+                    const letter = letters[i];
+                    letter.checkMouse(mouseX, mouseY);
+                    letter.update();
+                    letter.draw();
+
+                    // Remover letras que saíram da tela ou ficaram transparentes
+                    if (letter.y > canvas.height + 100 || letter.opacity <= 0) {
+                        letters.splice(i, 1);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // Iniciar animação
+            animate();
+
+            // Adicionar novas letras a cada 75ms
+            setInterval(addLetter, 75);
+
+            // Resize handling
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const columns = canvas.width / fontSize;
+                drops.length = 0;
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
-        
-        function closeDropdown(id) {
-            const section = document.getElementById(id);
-            section.classList.remove('active');
-        }
-    </script>
+        </script>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="dropdown-section">
-        <div class="container">
-            <button class="close-btn" onclick="closeDropdown('sobre')">Fechar</button>
-            <div class="about-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
-                <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Sobre Mim</h2>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const navLinks = document.querySelectorAll('nav a');
                 
-                <div class="about-text" style="margin-bottom: 2rem;">
-                    <p style="margin-bottom: 1rem;">Me chamo Pedro Braiti e sou estudante de Engenharia de Computação. seja bem vindo ao meu site.</p>
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        
+                        // Se for sobre ou contato, trata como dropdown
+                        if(targetId === 'sobre' || targetId === 'contato') {
+                            const targetSection = document.getElementById(targetId);
+                            const isActive = targetSection.classList.contains('active');
+                            
+                            // Fecha todas as seções dropdown primeiro
+                            document.querySelectorAll('.dropdown-section').forEach(section => {
+                                section.classList.remove('active');
+                            });
+                            
+                            // Se a seção clicada não estava ativa, abre ela
+                            if (!isActive) {
+                                targetSection.classList.add('active');
+                            }
+                        } else {
+                            // Para outros links, mantém o comportamento original
+                            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+            });
+            
+            function closeDropdown(id) {
+                const section = document.getElementById(id);
+                section.classList.remove('active');
+            }
+        </script>
+
+        <!-- Seção Sobre -->
+        <section id="sobre" class="dropdown-section">
+            <div class="container">
+                <button class="close-btn" onclick="closeDropdown('sobre')">Fechar</button>
+                <div class="about-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
+                    <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Sobre Mim</h2>
+                    
+                    <div class="about-text" style="margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1rem;">Me chamo Pedro Braiti e sou estudante de Engenharia de Computação. seja bem vindo ao meu site.</p>
+                    </div>
+
+                    <div class="about-section-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                        <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
+                            <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Interesses</h3>
+                            <ul style="list-style: none;">
+                                <li>Desenvolvimento de Software.</li>
+                                <li>Analise de dados e automação.</li>
+                                <li>Machine Learning.</li>
+                                <li>Robótica.</li>
+                                <li>IoT (Internet das Coisas).</li>
+                            </ul>
+                        </div>
+
+                        <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
+                            <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Experiências Profissionais</h3>
+                            <ul style="list-style: none;">
+                                <li>Participação em grupo internacional de desenvolvimento de jogos digitais como programador.</li>
+                                <li>Experiência de trabalho como designer e modelador 3D para contratantes internacionais.</li>
+                            </ul>
+                        </div>
+
+                        <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
+                            <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Habilidades e Competências</h3>
+                            <ul style="list-style: none;">
+                                <li>Programação: Python, Java, C++, c#.</li>
+                                <li>Modelagem 3d: Blender, SolidWorks.</li>
+                                <li>Desenvolvimento Web: HTML, CSS, JavaScript, openGL.</li>
+                                <li>Banco de Dados: MySQL, MongoDB.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="about-section-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                    <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
-                        <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Interesses</h3>
-                        <ul style="list-style: none;">
-                            <li>Desenvolvimento de Software.</li>
-                            <li>Analise de dados e automação.</li>
-                            <li>Machine Learning.</li>
-                            <li>Robótica.</li>
-                            <li>IoT (Internet das Coisas).</li>
-                        </ul>
-                    </div>
+        <!-- Seção Contato -->
+        <section id="contato" class="dropdown-section">
+            <div class="container">
+                <button class="close-btn" onclick="closeDropdown('contato')">Fechar</button>
+                <div class="contact-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
+                    <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Contato</h2>
+                    
+                    <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
+                        <a href="https://github.com/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fab fa-github" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">GitHub</h3>
+                            <p>github.com/pedrobraiti</p>
+                        </a>
+                    
+                        <a href="https://www.linkedin.com/in/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fab fa-linkedin" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">LinkedIn</h3>
+                            <p>linkedin.com/in/pedrobraiti</p>
+                        </a>
+                    
+                        <a href="braitipedro17@gmail.com" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fas fa-envelope" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">Gmail</h3>
+                            <p>braitipedro17@gmail.com</p>
+                        </a>
 
-                    <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
-                        <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Experiências Profissionais</h3>
-                        <ul style="list-style: none;">
-                            <li>Participação em grupo internacional de desenvolvimento de jogos digitais como programador.</li>
-                            <li>Experiência de trabalho como designer e modelador 3D para contratantes internacionais.</li>
-                        </ul>
-                    </div>
-
-                    <div class="about-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2);">
-                        <h3 style="color: var(--matrix-color); margin-bottom: 1rem;">Habilidades e Competências</h3>
-                        <ul style="list-style: none;">
-                            <li>Programação: Python, Java, C++, c#.</li>
-                            <li>Modelagem 3d: Blender, SolidWorks.</li>
-                            <li>Desenvolvimento Web: HTML, CSS, JavaScript, openGL.</li>
-                            <li>Banco de Dados: MySQL, MongoDB.</li>
-                        </ul>
+                        <a href="https://www.artstation.com/pedrotyppe" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fab fa-artstation" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">ArtStation</h3>
+                            <p>artstation.com/pedrotyppe</p>
+                        </a>
+                        <a href="https://www.instagram.com/pbyte.dev/" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fab fa-instagram" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">instagram</h3>
+                            <p>instagram.com/pbyte.dev</p>
+                        </a>
+                        <a href="https://linktr.ee/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                            <i class="fas fa-tree" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--matrix-color);">linktr.ee</h3>
+                            <p>linktr.ee/pedrobraiti</p>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Seção Contato -->
-    <section id="contato" class="dropdown-section">
-        <div class="container">
-            <button class="close-btn" onclick="closeDropdown('contato')">Fechar</button>
-            <div class="contact-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
-                <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Contato</h2>
-                
-                <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
-                    <a href="https://github.com/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fab fa-github" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">GitHub</h3>
-                        <p>github.com/pedrobraiti</p>
-                    </a>
-                
-                    <a href="https://www.linkedin.com/in/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fab fa-linkedin" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">LinkedIn</h3>
-                        <p>linkedin.com/in/pedrobraiti</p>
-                    </a>
-                
-                    <a href="braitipedro17@gmail.com" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">Gmail</h3>
-                        <p>braitipedro17@gmail.com</p>
-                    </a>
+        <script src="loadProjects.js"></script>
 
-                    <a href="https://www.artstation.com/pedrotyppe" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fab fa-artstation" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">ArtStation</h3>
-                        <p>artstation.com/pedrotyppe</p>
-                    </a>
-                    <a href="https://www.instagram.com/pbyte.dev/" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fab fa-instagram" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">instagram</h3>
-                        <p>instagram.com/pbyte.dev</p>
-                    </a>
-                    <a href="https://linktr.ee/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
-                        <i class="fas fa-tree" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--matrix-color);">linktr.ee</h3>
-                        <p>linktr.ee/pedrobraiti</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="loadProjects.js"></script>
-
-</body>
+    </body>
 </html>
