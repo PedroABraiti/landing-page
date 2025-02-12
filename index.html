@@ -286,17 +286,39 @@
                 transform: translateY(20px);
                 transition: all 0.8s ease;
             }
+
+            .contact-card {
+                /* Propriedades de aparência */
+                background: rgba(0, 0, 0, 0.3);
+                height: 100%;
+                z-index: 1;
+                min-height: 200px;
+                width: 100%;
+                
+                /* Propriedades de transformação e animação */
+                opacity: 0;
+                transform: translateY(30px);
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+                
+                /* Propriedades de transição */
+                transition: all 0.6s ease;
+                
+                /* Propriedades de display */
+                display: block;
+            }
+
+            .contact-card i,
+            .contact-card h3,
+            .contact-card p {
+                transform: translateZ(30px);
+                position: relative;
+            }
             
             .contact-description {
                 opacity: 0;
                 transform: translateY(20px);
                 transition: all 0.8s ease;
-            }
-            
-            .contact-card {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: all 0.6s ease;
             }
             
             .dropdown-section.active .contact-title {
@@ -480,6 +502,27 @@
                             z-index: 5;
                             pointer-events: auto;
                         }
+
+                        /* Estilos dos cards de contato */
+                        .tilt-wrapper-contact {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            perspective: 1000px;
+                        }
+                        .tilt-hit-area-contact {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 4;
+                        }
+                        .contact-card > * {
+                            position: relative;
+                            z-index: 5;
+                        }
                     `;
                     document.head.appendChild(style);
             
@@ -496,51 +539,37 @@
                     function handleMouseMove(event) {
                         if (isCalculating) return;
                         isCalculating = true;
-            
-                        const rect = hitArea.getBoundingClientRect();
+                    
+                        const rect = wrapper.getBoundingClientRect();
                         const mouseX = event.clientX - rect.left;
                         const mouseY = event.clientY - rect.top;
                         
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
                         
-                        const rotateX = ((mouseY - centerY) / centerY) * -15;
-                        const rotateY = ((mouseX - centerX) / centerX) * 15;
-            
+                        // Reduzir o ângulo de rotação para 10 graus
+                        const rotateX = ((mouseY - centerY) / centerY) * -10;
+                        const rotateY = ((mouseX - centerX) / centerX) * 10;
+                    
                         const gradientX = (mouseX / rect.width) * 100;
                         const gradientY = (mouseY / rect.height) * 100;
                         
-                        heroContent.style.transition = 'all 0.2s linear';
-                        
                         heroContent.style.transform = `
-                        perspective(1000px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        scale3d(1.02, 1.02, 1.02)
+                            perspective(1000px)
+                            rotateX(${rotateX}deg)
+                            rotateY(${rotateY}deg)
+                            scale3d(1.02, 1.02, 1.02)
                         `;
-            
-                        // Mantendo o mesmo efeito de luz que estava funcionando bem
+                    
+                        // Ajustar o gradiente para ser mais suave
                         heroContent.style.background = `
                             linear-gradient(
                                 ${gradientY}deg,
-                                rgba(0, 255, 149, 0.20) 0%,
+                                rgba(0, 255, 149, 0.15) 0%,
                                 rgba(10, 10, 10, 0.95) ${gradientX}%
                             )
                         `;
-                        
-                        const profileImage = heroContent.querySelector('.profile-image');
-                        const heroText = heroContent.querySelector('.hero-text');
-                        
-                        if (profileImage) {
-                            profileImage.style.transition = 'transform 0.2s linear';
-                            profileImage.style.transform = `translateZ(50px) rotateX(${rotateX * 0.5}deg) rotateY(${rotateY * 0.5}deg)`;
-                        }
-                        
-                        if (heroText) {
-                            heroText.style.transition = 'transform 0.2s linear';
-                            heroText.style.transform = `translateZ(30px) rotateX(${rotateX * 0.3}deg) rotateY(${rotateY * 0.3}deg)`;
-                        }
-            
+                    
                         requestAnimationFrame(() => {
                             isCalculating = false;
                         });
@@ -901,6 +930,116 @@
                 section.classList.remove('active');
                 document.body.style.overflow = 'auto'; // Reativa o scroll da página principal
             }
+
+            function create3DEffect(cards) {
+                // Definir as cores para cada tipo de contato
+                const cardColors = {
+                    'github': '75, 97, 222',      // Azul GitHub
+                    'linkedin': '10, 102, 194',    // Azul LinkedIn
+                    'gmail': '234, 67, 53',        // Vermelho Gmail
+                    'artstation': '13, 180, 245',  // Azul ArtStation
+                    'instagram': '225, 48, 108',   // Rosa Instagram
+                    'linktree': '43, 183, 96'      // Verde Linktree
+                };
+            
+                cards.forEach(card => {
+                    // Criar wrapper
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'tilt-wrapper-contact';
+                    
+                    // Obter dimensões originais
+                    const originalRect = card.getBoundingClientRect();
+                    
+                    // Criar área de detecção
+                    const hitArea = document.createElement('div');
+                    hitArea.className = 'tilt-hit-area-contact';
+                    
+                    // Estruturar elementos
+                    card.parentNode.insertBefore(wrapper, card);
+                    wrapper.appendChild(card);
+                    wrapper.appendChild(hitArea);
+                    
+                    // Configurar estilos iniciais
+                    Object.assign(card.style, {
+                        transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+                        transition: 'all 0.2s linear',
+                        transformStyle: 'preserve-3d',
+                        position: 'relative'
+                    });
+            
+                    let isCalculating = false;
+            
+                    function handleMouseMove(event) {
+                        if (isCalculating) return;
+                        isCalculating = true;
+            
+                        const rect = wrapper.getBoundingClientRect();
+                        const mouseX = event.clientX - rect.left;
+                        const mouseY = event.clientY - rect.top;
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const rotateX = ((mouseY - centerY) / centerY) * -15;
+                        const rotateY = ((mouseX - centerX) / centerX) * 15;
+            
+                        const gradientX = (mouseX / rect.width) * 100;
+                        const gradientY = (mouseY / rect.height) * 100;
+            
+                        // Determinar qual tipo de card é baseado no ícone ou classe
+                        let cardType = 'github'; // Valor padrão
+                        if (card.querySelector('.fa-github')) cardType = 'github';
+                        if (card.querySelector('.fa-linkedin')) cardType = 'linkedin';
+                        if (card.querySelector('.fa-envelope')) cardType = 'gmail';
+                        if (card.querySelector('.fa-artstation')) cardType = 'artstation';
+                        if (card.querySelector('.fa-instagram')) cardType = 'instagram';
+                        if (card.querySelector('.fa-tree')) cardType = 'linktree';
+            
+                        const color = cardColors[cardType];
+                        
+                        card.style.transform = `
+                            perspective(1000px)
+                            rotateX(${rotateX}deg)
+                            rotateY(${rotateY}deg)
+                            scale3d(1.02, 1.02, 1.02)
+                        `;
+            
+                        card.style.background = `
+                            linear-gradient(
+                                ${gradientY}deg,
+                                rgba(${color}, 0.20) 0%,
+                                rgba(10, 10, 10, 0.95) ${gradientX}%
+                            )
+                        `;
+            
+                        requestAnimationFrame(() => {
+                            isCalculating = false;
+                        });
+                    }
+            
+                    function handleMouseLeave() {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                        const cardType = 
+                            card.querySelector('.fa-github') ? 'github' :
+                            card.querySelector('.fa-linkedin') ? 'linkedin' :
+                            card.querySelector('.fa-envelope') ? 'gmail' :
+                            card.querySelector('.fa-artstation') ? 'artstation' :
+                            card.querySelector('.fa-instagram') ? 'instagram' :
+                            card.querySelector('.fa-tree') ? 'linktree' : 'github';
+                        
+                        card.style.background = `rgba(0, 0, 0, 0.3)`;
+                    }
+            
+                    wrapper.addEventListener('mousemove', handleMouseMove);
+                    wrapper.addEventListener('mouseleave', handleMouseLeave);
+                });
+            }
+            
+            // Aplicar o efeito quando o documento carregar
+            document.addEventListener('DOMContentLoaded', function() {
+                const contactCards = document.querySelectorAll('.contact-card');
+                create3DEffect(contactCards);
+            });
             
         </script>
 
@@ -959,38 +1098,37 @@
                     <p class="contact-description" style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: var(--text-color);">
                         Fique à vontade para me contactar por qualquer um destes meios
                     </p>
-                    <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Contato</h2>
                     
                     <div class="contact-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
-                        <a href="https://github.com/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="https://github.com/pedrobraiti" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-github" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">GitHub</h3>
                             <p>github.com/pedrobraiti</p>
                         </a>
                     
-                        <a href="https://www.linkedin.com/in/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="https://www.linkedin.com/in/pedrobraiti" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-linkedin" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">LinkedIn</h3>
                             <p>linkedin.com/in/pedrobraiti</p>
                         </a>
                     
-                        <a href="braitipedro17@gmail.com" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="braitipedro17@gmail.com" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fas fa-envelope" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">Gmail</h3>
                             <p>braitipedro17@gmail.com</p>
                         </a>
 
-                        <a href="https://www.artstation.com/pedrotyppe" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="https://www.artstation.com/pedrotyppe" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-artstation" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">ArtStation</h3>
                             <p>artstation.com/pedrotyppe</p>
                         </a>
-                        <a href="https://www.instagram.com/pbyte.dev/" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="https://www.instagram.com/pbyte.dev/" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-instagram" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">instagram</h3>
                             <p>instagram.com/pbyte.dev</p>
                         </a>
-                        <a href="https://linktr.ee/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="https://linktr.ee/pedrobraiti" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fas fa-tree" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">linktr.ee</h3>
                             <p>linktr.ee/pedrobraiti</p>
