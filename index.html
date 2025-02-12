@@ -394,7 +394,7 @@
         
                 // Configurar estilos iniciais
                 Object.assign(heroContent.style, {
-                    transform: 'perspective(1000px)',
+                    transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', // Adicione esta linha
                     transition: 'all 0.2s linear',
                     transformStyle: 'preserve-3d',
                     background: 'var(--overlay-color)'
@@ -419,13 +419,13 @@
                     const gradientX = (mouseX / rect.width) * 100;
                     const gradientY = (mouseY / rect.height) * 100;
                     
-                    heroContent.style.transition = 'background 0.1s linear';
+                    heroContent.style.transition = 'all 0.2s linear';
                     
                     heroContent.style.transform = `
-                        perspective(1000px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        scale3d(1.02, 1.02, 1.02)
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale3d(1.02, 1.02, 1.02)
                     `;
         
                     // Mantendo o mesmo efeito de luz que estava funcionando bem
@@ -441,12 +441,12 @@
                     const heroText = heroContent.querySelector('.hero-text');
                     
                     if (profileImage) {
-                        profileImage.style.transition = 'none';
+                        profileImage.style.transition = 'transform 0.2s linear';
                         profileImage.style.transform = `translateZ(50px) rotateX(${rotateX * 0.5}deg) rotateY(${rotateY * 0.5}deg)`;
                     }
                     
                     if (heroText) {
-                        heroText.style.transition = 'none';
+                        heroText.style.transition = 'transform 0.2s linear';
                         heroText.style.transform = `translateZ(30px) rotateX(${rotateX * 0.3}deg) rotateY(${rotateY * 0.3}deg)`;
                     }
         
@@ -498,13 +498,11 @@
 
                 let isInside = false;
                 let areaRect = null;
-
+                let lastRotateX = 0;
+                let lastRotateY = 0;
+                
                 function updateDetectArea() {
                     const heroRect = heroContent.getBoundingClientRect();
-                    detectArea.style.left = heroRect.left + 'px';
-                    detectArea.style.top = heroRect.top + 'px';
-                    detectArea.style.width = heroRect.width + 'px';
-                    detectArea.style.height = heroRect.height + 'px';
                     areaRect = {
                         left: heroRect.left,
                         top: heroRect.top,
@@ -512,7 +510,7 @@
                         bottom: heroRect.top + heroRect.height
                     };
                 }
-
+                
                 document.addEventListener('mousemove', (event) => {
                     if (!areaRect) updateDetectArea();
                     
@@ -528,6 +526,10 @@
                     if (isMouseInside) {
                         if (!isInside) {
                             isInside = true;
+                            // Começar da posição plana
+                            heroContent.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                            // Forçar um reflow
+                            heroContent.offsetHeight;
                         }
                         handleMouseMove(event);
                     } else if (isInside) {
