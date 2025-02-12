@@ -219,14 +219,6 @@
                 gap: 2rem;
             }
 
-            .project-card {
-                background: rgba(20, 20, 20, 0.95);
-                border-radius: 10px;
-                overflow: hidden;
-                border: 1px solid rgba(0, 255, 149, 0.2);
-                transition: transform 0.3s, box-shadow 0.3s;
-            }
-
             .project-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 0 20px rgba(0, 255, 149, 0.2);
@@ -266,16 +258,115 @@
                 top: -100%;
                 left: 0;
                 width: 100%;
-                background: rgba(10, 10, 10, 0.95);
+                height: calc(100vh - 35px); /* Ajustado para corresponder ao novo top */
+                background: rgba(0, 0, 0, 0.98);
                 z-index: 999;
                 transition: top 0.5s ease;
-                max-height: 80vh;
                 overflow-y: auto;
-                backdrop-filter: blur(5px);
             }
             
             .dropdown-section.active {
-                top: 70px; /* Ajuste conforme a altura do seu header */
+                top: 35px;
+            }
+
+            .about-title {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.8s ease;
+            }
+            
+            .about-card {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease;
+            }
+
+            .contact-title {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.8s ease;
+            }
+            
+            .contact-description {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.8s ease;
+            }
+            
+            .contact-card {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease;
+            }
+            
+            .dropdown-section.active .contact-title {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .dropdown-section.active .contact-description {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.3s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(1) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.6s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(2) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.8s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(3) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1.0s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(4) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1.2s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(5) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1.4s;
+            }
+            
+            .dropdown-section.active .contact-card:nth-child(6) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1.6s;
+            }
+            
+            .dropdown-section.active .about-title {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .dropdown-section.active .about-card:nth-child(1) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.5s;
+            }
+            
+            .dropdown-section.active .about-card:nth-child(2) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1s;
+            }
+            
+            .dropdown-section.active .about-card:nth-child(3) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 1.5s;
             }
             
             .close-btn {
@@ -498,8 +589,6 @@
 
                     let isInside = false;
                     let areaRect = null;
-                    let lastRotateX = 0;
-                    let lastRotateY = 0;
                     
                     function updateDetectArea() {
                         const heroRect = heroContent.getBoundingClientRect();
@@ -648,11 +737,7 @@
                 color: #000;
                 border-color: #00ff94;
             }
-            .project-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
-            }
+            
         </style>
         
         <script>
@@ -773,22 +858,8 @@
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                const columns = canvas.width / fontSize;
-                drops.length = 0;
-                for (let i = 0; i < columns; i++) {
-                    drops[i] = 1;
-                }
             });
 
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
         </script>
 
         <script>
@@ -808,32 +879,37 @@
                             // Fecha todas as seções dropdown primeiro
                             document.querySelectorAll('.dropdown-section').forEach(section => {
                                 section.classList.remove('active');
+                                document.body.style.overflow = 'auto'; // Reativa o scroll ao fechar
                             });
                             
                             // Se a seção clicada não estava ativa, abre ela
                             if (!isActive) {
                                 targetSection.classList.add('active');
+                                document.body.style.overflow = 'hidden'; // Desativa o scroll ao abrir
                             }
                         } else {
                             // Para outros links, mantém o comportamento original
-                            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                            document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
                         }
                     });
                 });
             });
             
+            // Função para fechar dropdown
             function closeDropdown(id) {
                 const section = document.getElementById(id);
                 section.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Reativa o scroll da página principal
             }
+            
         </script>
 
         <!-- Seção Sobre -->
         <section id="sobre" class="dropdown-section">
             <div class="container">
                 <button class="close-btn" onclick="closeDropdown('sobre')">Fechar</button>
-                <div class="about-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
-                    <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Sobre Mim</h2>
+                <div class="about-content">
+                    <h2 class="about-title" style="color: var(--matrix-color); margin-bottom: 3rem; text-align: center; text-transform: uppercase; letter-spacing: 3px; font-size: 2.5rem;">ABOUT ME</h2>
                     
                     <div class="about-text" style="margin-bottom: 2rem;">
                         <p style="margin-bottom: 1rem;">Me chamo Pedro Braiti e sou estudante de Engenharia de Computação. seja bem vindo ao meu site.</p>
@@ -877,10 +953,15 @@
         <section id="contato" class="dropdown-section">
             <div class="container">
                 <button class="close-btn" onclick="closeDropdown('contato')">Fechar</button>
-                <div class="contact-content" style="background: rgba(20, 20, 20, 0.95); border-radius: 10px; padding: 2rem; border: 1px solid rgba(0, 255, 149, 0.2);">
+                <div class="contact-content">
+                    <h2 class="contact-title" style="color: var(--matrix-color); margin-bottom: 3rem; text-align: center; text-transform: uppercase; letter-spacing: 3px; font-size: 2.5rem;">CONTACT ME</h2>
+                    
+                    <p class="contact-description" style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: var(--text-color);">
+                        Fique à vontade para me contactar por qualquer um destes meios
+                    </p>
                     <h2 style="color: var(--matrix-color); margin-bottom: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Contato</h2>
                     
-                    <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
+                    <div class="contact-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
                         <a href="https://github.com/pedrobraiti" target="_blank" class="contact-card" style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-github" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">GitHub</h3>
