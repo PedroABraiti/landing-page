@@ -442,10 +442,10 @@
             <nav class="container">
                 <h1 style="color: var(--matrix-color);">Pedro Alessandrini Braiti</h1>
                 <ul>
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#projetos">Projetos</a></li>
-                    <li><a href="#sobre">Sobre <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
-                    <li><a href="#contato">Contato <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
+                    <li><a href="#inicio">Home</a></li>
+                    <li><a href="#projetos">Projects</a></li>
+                    <li><a href="#sobre">About <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
+                    <li><a href="#contato">links <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a></li>
                 </ul>
             </nav>
         </header>
@@ -672,7 +672,7 @@
                         <h1>Hi, I'm <span style="color: #81ffca;">Pedro</span></h1>
                         <p>Developer passionate about <span style="color: #ffae43;">technology</span> and <span style="color: #ffae43;">innovation</span>.
                             Transforming complex problems into elegant <span style="color: #ffae43;">solutions</span> through code.</p>
-                        <a href="#projetos" class="btn">Ver Projetos</a>
+                        <a href="#projetos" class="btn">See projects</a>
                     </div>
                 </div>
             </div>
@@ -680,12 +680,12 @@
 
         <section id="projetos" class="projects">
             <div class="container">
-                <h2>Meus Projetos</h2>
+                <h2>My projects</h2>
         
                 <div class="category-buttons">
-                    <button class="category-btn active" data-category="programacao">Programação</button>
-                    <button class="category-btn" data-category="modelagem">Modelagem 3D</button>
-                    <button class="category-btn" data-category="mecanico">Projetos Mecânicos</button>
+                    <button class="category-btn active" data-category="programacao">Coding</button>
+                    <button class="category-btn" data-category="modelagem">3D modelling</button>
+                    <button class="category-btn" data-category="mecanico">Hardware</button>
                 </div>
         
                 <div class="project-grid" id="programacao">
@@ -693,7 +693,7 @@
                         <div class="project-content">
                             <h3>Projeto 1 - Programação</h3>
                             <p>Descrição do projeto.</p>
-                            <a href="#" class="btn">Ver Projeto</a>
+                            <a href="#" class="btn">Visit Project</a>
                         </div>
                     </div>
                 </div>
@@ -703,7 +703,7 @@
                         <div class="project-content">
                             <h3>Projeto 1 - Modelagem 3D</h3>
                             <p>Descrição do projeto.</p>
-                            <a href="#" class="btn">Ver Projeto</a>
+                            <a href="#" class="btn">Visit Project</a>
                         </div>
                     </div>
                 </div>
@@ -713,7 +713,7 @@
                         <div class="project-content">
                             <h3>Projeto 1 - Mecânico</h3>
                             <p>Descrição do projeto.</p>
-                            <a href="#" class="btn">Ver Projeto</a>
+                            <a href="#" class="btn">Visit Project</a>
                         </div>
                     </div>
                 </div>
@@ -932,29 +932,25 @@
             }
 
             function create3DEffect(cards) {
-                // Definir as cores para cada tipo de contato
                 const cardColors = {
-                    'github': '75, 97, 222',      // Azul GitHub
-                    'linkedin': '10, 102, 194',    // Azul LinkedIn
-                    'gmail': '234, 67, 53',        // Vermelho Gmail
-                    'artstation': '13, 180, 245',  // Azul ArtStation
-                    'instagram': '225, 48, 108',   // Rosa Instagram
-                    'linktree': '43, 183, 96'      // Verde Linktree
+                    'github': '75, 97, 222',      
+                    'linkedin': '10, 102, 194',    
+                    'gmail': '234, 67, 53',        
+                    'artstation': '13, 180, 245',  
+                    'instagram': '225, 70, 130',   
+                    'linktree': '43, 183, 96'      
                 };
             
                 cards.forEach(card => {
-                    // Criar wrapper
                     const wrapper = document.createElement('div');
                     wrapper.className = 'tilt-wrapper-contact';
                     
-                    // Obter dimensões originais
                     const originalRect = card.getBoundingClientRect();
                     
-                    // Criar área de detecção
                     const hitArea = document.createElement('div');
                     hitArea.className = 'tilt-hit-area-contact';
+                    hitArea.style.pointerEvents = 'none'; // Esta é a mudança principal
                     
-                    // Estruturar elementos
                     card.parentNode.insertBefore(wrapper, card);
                     wrapper.appendChild(card);
                     wrapper.appendChild(hitArea);

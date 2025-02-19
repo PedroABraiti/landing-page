@@ -50,7 +50,7 @@ function createProjectCard(project) {
                 </div>
                 <div class="project-controls">
                     <button class="btn toggle-project" onclick="toggleProject('${project.id}')">
-                        <i class="fas fa-play"></i> Mostrar Projeto
+                        <i class="fas fa-play"></i> See Project
                     </button>
                     <button class="btn restart-project" onclick="restartProject('${project.id}')" style="display: none;">
                         <i class="fas fa-redo"></i> Reiniciar
@@ -72,7 +72,7 @@ function createProjectCard(project) {
                 <div class="tech-stack">
                     ${project.tecnologias.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                 </div>
-                <a href="${project.link}" class="btn" target="_blank">Ver Projeto</a>
+                <a href="${project.link}" class="btn" target="_blank">Visit project</a>
             </div>
         `;
     }
@@ -140,11 +140,11 @@ window.toggleProject = function(projectId) {
     
     if (frame.style.display === 'none') {
         frame.style.display = 'block';
-        button.innerHTML = '<i class="fas fa-stop"></i> Ocultar Projeto';
+        button.innerHTML = '<i class="fas fa-stop"></i> Hide project';
         restartButton.style.display = 'inline-block';
     } else {
         frame.style.display = 'none';
-        button.innerHTML = '<i class="fas fa-play"></i> Mostrar Projeto';
+        button.innerHTML = '<i class="fas fa-play"></i> Visit Project';
         restartButton.style.display = 'none';
     }
 }
@@ -154,7 +154,7 @@ window.restartProject = function(projectId) {
     if (frame) {
         // Em vez de recarregar o iframe, enviamos uma mensagem para reiniciar
         frame.contentWindow.postMessage({
-            type: 'restart'
+            type: 'reload'
         }, '*');
     }
 }
