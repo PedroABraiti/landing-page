@@ -152,9 +152,13 @@ window.toggleProject = function(projectId) {
 window.restartProject = function(projectId) {
     const frame = document.querySelector(`#frame-${projectId}`);
     if (frame) {
-        // Em vez de recarregar o iframe, enviamos uma mensagem para reiniciar
+        // Enviar apenas uma mensagem para reiniciar
+        // Vamos escolher apenas uma variável para atualizar,
+        // o que deve ser suficiente para disparar a reinicialização
         frame.contentWindow.postMessage({
-            type: 'reload'
+            type: 'updateVariable',
+            variable: 'chanceWhite',
+            value: '50'
         }, '*');
     }
 }

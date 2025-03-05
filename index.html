@@ -262,7 +262,7 @@
                 background: rgba(0, 0, 0, 0.98);
                 z-index: 999;
                 transition: top 0.5s ease;
-                overflow-y: auto;
+                overflow-y: auto; /* Já está correto, mantém rolagem interna */
             }
             
             .dropdown-section.active {
@@ -666,13 +666,27 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="profile-image">
-                        <img src="/api/placeholder/200/200" alt="foto" />
+                        <img src="profile_picture.jpg" alt="Pedro Braiti" />
                     </div>
                     <div class="hero-text">
                         <h1>Hi, I'm <span style="color: #81ffca;">Pedro</span></h1>
                         <p>Developer passionate about <span style="color: #ffae43;">technology</span> and <span style="color: #ffae43;">innovation</span>.
                             Transforming complex problems into elegant <span style="color: #ffae43;">solutions</span> through code.</p>
-                        <a href="#projetos" class="btn">See projects</a>
+                            <a href="#projetos" class="btn">See projects</a>
+
+                            <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const heroProjectBtn = document.querySelector('.hero-text .btn');
+                                
+                                if (heroProjectBtn) {
+                                    heroProjectBtn.addEventListener('click', function(e) {
+                                        e.preventDefault();
+                                        const targetId = this.getAttribute('href').substring(1);
+                                        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                                    });
+                                }
+                            });
+                            </script>
                     </div>
                 </div>
             </div>
@@ -908,16 +922,22 @@
                             // Fecha todas as seções dropdown primeiro
                             document.querySelectorAll('.dropdown-section').forEach(section => {
                                 section.classList.remove('active');
-                                document.body.style.overflow = 'auto'; // Reativa o scroll ao fechar
+                                // Removido: document.body.style.overflow = 'auto';
                             });
                             
                             // Se a seção clicada não estava ativa, abre ela
                             if (!isActive) {
                                 targetSection.classList.add('active');
-                                document.body.style.overflow = 'hidden'; // Desativa o scroll ao abrir
+                                // Removido: document.body.style.overflow = 'hidden';
                             }
                         } else {
-                            // Para outros links, mantém o comportamento original
+                            // Fechar todas as seções dropdown para links como 'home' e 'projetos'
+                            document.querySelectorAll('.dropdown-section').forEach(section => {
+                                section.classList.remove('active');
+                                // Removido: document.body.style.overflow = 'auto';
+                            });
+                            
+                            // Para outros links, mantém o comportamento de rolagem suave
                             document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
                         }
                     });
@@ -928,7 +948,6 @@
             function closeDropdown(id) {
                 const section = document.getElementById(id);
                 section.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Reativa o scroll da página principal
             }
 
             function create3DEffect(cards) {
@@ -1108,11 +1127,33 @@
                             <p>linkedin.com/in/pedrobraiti</p>
                         </a>
                     
-                        <a href="braitipedro17@gmail.com" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
+                        <a href="javascript:void(0)" onclick="copyEmailToClipboard('braitipedro17@gmail.com', this)" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fas fa-envelope" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--matrix-color);">Gmail</h3>
                             <p>braitipedro17@gmail.com</p>
                         </a>
+                        
+                        <script>
+                        function copyEmailToClipboard(email, element) {
+                            navigator.clipboard.writeText(email).then(function() {
+                                // Salvar o conteúdo original do parágrafo
+                                const paragraph = element.querySelector('p');
+                                const originalText = paragraph.textContent;
+                                
+                                // Mudar para texto de confirmação
+                                paragraph.textContent = "Email copiado!";
+                                paragraph.style.color = "var(--matrix-color)";
+                                
+                                // Voltar ao texto original após 2 segundos
+                                setTimeout(function() {
+                                    paragraph.textContent = originalText;
+                                    paragraph.style.color = "";
+                                }, 2000);
+                            }).catch(function(err) {
+                                console.error('Erro ao copiar texto: ', err);
+                            });
+                        }
+                        </script>
 
                         <a href="https://www.artstation.com/pedrotyppe" target="_blank" class="contact-card" style="padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(0, 255, 149, 0.2); text-decoration: none; color: var(--text-color);">
                             <i class="fab fa-artstation" style="font-size: 2rem; color: var(--matrix-color); margin-bottom: 1rem;"></i>
